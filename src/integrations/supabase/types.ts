@@ -14,6 +14,199 @@ export type Database = {
   }
   public: {
     Tables: {
+      ai_project_scores: {
+        Row: {
+          ai_insights: Json | null
+          badge_level: string | null
+          business_model_score: number | null
+          calculated_at: string
+          created_at: string
+          financial_health_score: number | null
+          id: string
+          innovation_score: number | null
+          market_potential_score: number | null
+          overall_score: number | null
+          recommendations: string[] | null
+          risk_assessment_score: number | null
+          startup_id: string
+          team_execution_score: number | null
+        }
+        Insert: {
+          ai_insights?: Json | null
+          badge_level?: string | null
+          business_model_score?: number | null
+          calculated_at?: string
+          created_at?: string
+          financial_health_score?: number | null
+          id?: string
+          innovation_score?: number | null
+          market_potential_score?: number | null
+          overall_score?: number | null
+          recommendations?: string[] | null
+          risk_assessment_score?: number | null
+          startup_id: string
+          team_execution_score?: number | null
+        }
+        Update: {
+          ai_insights?: Json | null
+          badge_level?: string | null
+          business_model_score?: number | null
+          calculated_at?: string
+          created_at?: string
+          financial_health_score?: number | null
+          id?: string
+          innovation_score?: number | null
+          market_potential_score?: number | null
+          overall_score?: number | null
+          recommendations?: string[] | null
+          risk_assessment_score?: number | null
+          startup_id?: string
+          team_execution_score?: number | null
+        }
+        Relationships: []
+      }
+      connections: {
+        Row: {
+          created_at: string
+          id: string
+          message: string | null
+          recipient_id: string
+          requester_id: string
+          status: Database["public"]["Enums"]["connection_status"] | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          message?: string | null
+          recipient_id: string
+          requester_id: string
+          status?: Database["public"]["Enums"]["connection_status"] | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          message?: string | null
+          recipient_id?: string
+          requester_id?: string
+          status?: Database["public"]["Enums"]["connection_status"] | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      data_room_access_requests: {
+        Row: {
+          approved_at: string | null
+          approved_by: string | null
+          data_room_id: string
+          id: string
+          investor_id: string
+          nda_document_url: string | null
+          nda_signed_at: string | null
+          requested_at: string
+          status: Database["public"]["Enums"]["verification_status"] | null
+        }
+        Insert: {
+          approved_at?: string | null
+          approved_by?: string | null
+          data_room_id: string
+          id?: string
+          investor_id: string
+          nda_document_url?: string | null
+          nda_signed_at?: string | null
+          requested_at?: string
+          status?: Database["public"]["Enums"]["verification_status"] | null
+        }
+        Update: {
+          approved_at?: string | null
+          approved_by?: string | null
+          data_room_id?: string
+          id?: string
+          investor_id?: string
+          nda_document_url?: string | null
+          nda_signed_at?: string | null
+          requested_at?: string
+          status?: Database["public"]["Enums"]["verification_status"] | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fk_data_room_access_room"
+            columns: ["data_room_id"]
+            isOneToOne: false
+            referencedRelation: "data_rooms"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      data_room_documents: {
+        Row: {
+          created_at: string
+          data_room_id: string
+          file_name: string
+          file_size: number | null
+          file_url: string
+          id: string
+          uploaded_by: string
+        }
+        Insert: {
+          created_at?: string
+          data_room_id: string
+          file_name: string
+          file_size?: number | null
+          file_url: string
+          id?: string
+          uploaded_by: string
+        }
+        Update: {
+          created_at?: string
+          data_room_id?: string
+          file_name?: string
+          file_size?: number | null
+          file_url?: string
+          id?: string
+          uploaded_by?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fk_data_room_documents_room"
+            columns: ["data_room_id"]
+            isOneToOne: false
+            referencedRelation: "data_rooms"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      data_rooms: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          is_active: boolean | null
+          name: string
+          startup_id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_active?: boolean | null
+          name: string
+          startup_id: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_active?: boolean | null
+          name?: string
+          startup_id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       investor_profiles: {
         Row: {
           accreditation_verified: boolean | null
@@ -65,6 +258,136 @@ export type Database = {
           ticket_size_min?: number | null
           updated_at?: string
           user_id?: string
+        }
+        Relationships: []
+      }
+      messages: {
+        Row: {
+          connection_id: string
+          content: string | null
+          created_at: string
+          file_name: string | null
+          file_url: string | null
+          id: string
+          is_read: boolean | null
+          meeting_link: string | null
+          meeting_time: string | null
+          message_type: Database["public"]["Enums"]["message_type"] | null
+          recipient_id: string
+          sender_id: string
+        }
+        Insert: {
+          connection_id: string
+          content?: string | null
+          created_at?: string
+          file_name?: string | null
+          file_url?: string | null
+          id?: string
+          is_read?: boolean | null
+          meeting_link?: string | null
+          meeting_time?: string | null
+          message_type?: Database["public"]["Enums"]["message_type"] | null
+          recipient_id: string
+          sender_id: string
+        }
+        Update: {
+          connection_id?: string
+          content?: string | null
+          created_at?: string
+          file_name?: string | null
+          file_url?: string | null
+          id?: string
+          is_read?: boolean | null
+          meeting_link?: string | null
+          meeting_time?: string | null
+          message_type?: Database["public"]["Enums"]["message_type"] | null
+          recipient_id?: string
+          sender_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fk_messages_connection"
+            columns: ["connection_id"]
+            isOneToOne: false
+            referencedRelation: "connections"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      pitch_event_participants: {
+        Row: {
+          event_id: string
+          id: string
+          is_presenter: boolean | null
+          registered_at: string
+          user_id: string
+        }
+        Insert: {
+          event_id: string
+          id?: string
+          is_presenter?: boolean | null
+          registered_at?: string
+          user_id: string
+        }
+        Update: {
+          event_id?: string
+          id?: string
+          is_presenter?: boolean | null
+          registered_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fk_pitch_participants_event"
+            columns: ["event_id"]
+            isOneToOne: false
+            referencedRelation: "pitch_events"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      pitch_events: {
+        Row: {
+          created_at: string
+          created_by: string
+          description: string | null
+          duration_minutes: number | null
+          event_date: string
+          event_type: Database["public"]["Enums"]["event_type"] | null
+          id: string
+          is_active: boolean | null
+          max_participants: number | null
+          meeting_link: string | null
+          registration_deadline: string | null
+          title: string
+        }
+        Insert: {
+          created_at?: string
+          created_by: string
+          description?: string | null
+          duration_minutes?: number | null
+          event_date: string
+          event_type?: Database["public"]["Enums"]["event_type"] | null
+          id?: string
+          is_active?: boolean | null
+          max_participants?: number | null
+          meeting_link?: string | null
+          registration_deadline?: string | null
+          title: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string
+          description?: string | null
+          duration_minutes?: number | null
+          event_date?: string
+          event_type?: Database["public"]["Enums"]["event_type"] | null
+          id?: string
+          is_active?: boolean | null
+          max_participants?: number | null
+          meeting_link?: string | null
+          registration_deadline?: string | null
+          title?: string
         }
         Relationships: []
       }
@@ -203,6 +526,84 @@ export type Database = {
         }
         Relationships: []
       }
+      user_subscriptions: {
+        Row: {
+          created_at: string
+          ends_at: string | null
+          id: string
+          is_active: boolean | null
+          plan: Database["public"]["Enums"]["subscription_plan"]
+          starts_at: string
+          stripe_subscription_id: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          ends_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          plan: Database["public"]["Enums"]["subscription_plan"]
+          starts_at?: string
+          stripe_subscription_id?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          ends_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          plan?: Database["public"]["Enums"]["subscription_plan"]
+          starts_at?: string
+          stripe_subscription_id?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      verification_documents: {
+        Row: {
+          created_at: string
+          document_type: Database["public"]["Enums"]["document_type"]
+          file_name: string
+          file_url: string
+          id: string
+          notes: string | null
+          reviewed_at: string | null
+          reviewed_by: string | null
+          status: Database["public"]["Enums"]["verification_status"] | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          document_type: Database["public"]["Enums"]["document_type"]
+          file_name: string
+          file_url: string
+          id?: string
+          notes?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: Database["public"]["Enums"]["verification_status"] | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          document_type?: Database["public"]["Enums"]["document_type"]
+          file_name?: string
+          file_url?: string
+          id?: string
+          notes?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: Database["public"]["Enums"]["verification_status"] | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -211,9 +612,21 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
+      connection_status: "pending" | "accepted" | "declined"
+      document_type:
+        | "government_registration"
+        | "founder_kyc"
+        | "domain_validation"
+        | "accreditation_proof"
+        | "proof_of_funds"
+        | "business_license"
+      event_type: "pitch_event" | "demo_day" | "networking"
       investor_type: "angel" | "vc" | "family-office" | "corporate-vc"
+      message_type: "text" | "file" | "meeting_invite" | "data_room_request"
       startup_stage: "idea" | "seed" | "early" | "growth" | "expansion"
+      subscription_plan: "free" | "pro" | "premium" | "elite"
       user_type: "startup" | "investor" | "service-provider"
+      verification_status: "pending" | "in_review" | "approved" | "rejected"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -341,9 +754,22 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
+      connection_status: ["pending", "accepted", "declined"],
+      document_type: [
+        "government_registration",
+        "founder_kyc",
+        "domain_validation",
+        "accreditation_proof",
+        "proof_of_funds",
+        "business_license",
+      ],
+      event_type: ["pitch_event", "demo_day", "networking"],
       investor_type: ["angel", "vc", "family-office", "corporate-vc"],
+      message_type: ["text", "file", "meeting_invite", "data_room_request"],
       startup_stage: ["idea", "seed", "early", "growth", "expansion"],
+      subscription_plan: ["free", "pro", "premium", "elite"],
       user_type: ["startup", "investor", "service-provider"],
+      verification_status: ["pending", "in_review", "approved", "rejected"],
     },
   },
 } as const
