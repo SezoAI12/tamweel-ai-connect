@@ -28,38 +28,19 @@ type MenuItem = {
 };
 
 export const DashboardSidebar = ({ userType }: DashboardSidebarProps) => {
-  const [activeItem, setActiveItem] = useState('overview');
+  const [activeItem, setActiveItem] = useState('home');
 
   const getMenuItems = (): MenuItem[] => {
-    const baseItems: MenuItem[] = [
-      { icon: Home, label: 'Overview', href: 'overview' },
-      { icon: Users, label: 'Connections', href: 'connections' },
-      { icon: MessageSquare, label: 'Messages', href: 'messages' },
-      { icon: Calendar, label: 'Events', href: 'events' },
-      { icon: Shield, label: 'Verification', href: 'verification' },
-      { icon: CreditCard, label: 'Subscription', href: 'subscription' },
+    // Main navigation items (same for all roles)
+    const mainItems: MenuItem[] = [
+      { icon: Home, label: 'Home', href: 'home' },
+      { icon: Users, label: 'Discover', href: 'discover' },
+      { icon: Lightbulb, label: 'AI Coach', href: 'ai-coach' },
+      { icon: Shield, label: 'My Score', href: 'my-score' },
+      { icon: MessageSquare, label: 'Inbox', href: 'inbox' },
     ];
 
-    const roleSpecificItems: Record<string, MenuItem[]> = {
-      startup: [
-        { icon: FileText, label: 'Data Room', href: 'dataroom' },
-        { icon: TrendingUp, label: 'AI Score', href: 'ai-score' },
-        { icon: Target, label: 'Fundraising', href: 'fundraising' },
-        { icon: Lightbulb, label: 'AI Coach', href: 'ai-coach' },
-      ],
-      investor: [
-        { icon: Briefcase, label: 'Deal Flow', href: 'dealflow' },
-        { icon: TrendingUp, label: 'Analytics', href: 'analytics' },
-        { icon: Building, label: 'Portfolio', href: 'portfolio' },
-      ],
-      'service-provider': [
-        { icon: Briefcase, label: 'Services', href: 'services' },
-        { icon: Target, label: 'Leads', href: 'leads' },
-        { icon: TrendingUp, label: 'Performance', href: 'performance' },
-      ],
-    };
-
-    return [...baseItems, ...roleSpecificItems[userType]];
+    return mainItems;
   };
 
   const menuItems = getMenuItems();
