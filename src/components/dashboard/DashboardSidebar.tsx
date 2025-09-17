@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { 
   Home, 
   Users, 
@@ -28,22 +28,34 @@ type MenuItem = {
 };
 
 export const DashboardSidebar = ({ userType }: DashboardSidebarProps) => {
-  const [activeItem, setActiveItem] = useState('home');
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const getMenuItems = (): MenuItem[] => {
     // Main navigation items (same for all roles)
     const mainItems: MenuItem[] = [
-      { icon: Home, label: 'Home', href: 'home' },
-      { icon: Users, label: 'Discover', href: 'discover' },
-      { icon: Lightbulb, label: 'AI Coach', href: 'ai-coach' },
-      { icon: Shield, label: 'My Score', href: 'my-score' },
-      { icon: MessageSquare, label: 'Inbox', href: 'inbox' },
+      { icon: Home, label: 'Home', href: '/dashboard' },
+      { icon: Users, label: 'Discover', href: '/discover' },
+      { icon: Lightbulb, label: 'AI Coach', href: '/ai-coach' },
+      { icon: Shield, label: 'My Score', href: '/my-score' },
+      { icon: MessageSquare, label: 'Inbox', href: '/inbox' },
     ];
+
+    // Add service management for service providers
+    if (userType === 'service-provider') {
+      mainItems.push({
+        icon: Briefcase,
+        label: 'Services',
+        href: '/service-management'
+      });
+    }
 
     return mainItems;
   };
 
   const menuItems = getMenuItems();
+
+  const isActive = (path: string) => location.pathname === path;
 
   return (
     <aside className="w-64 border-r bg-card h-screen sticky top-16">
@@ -51,12 +63,12 @@ export const DashboardSidebar = ({ userType }: DashboardSidebarProps) => {
         {menuItems.map((item) => (
           <Button
             key={item.href}
-            variant={activeItem === item.href ? 'default' : 'ghost'}
+            variant={isActive(item.href) ? 'default' : 'ghost'}
             className={cn(
               'w-full justify-start',
-              activeItem === item.href && 'bg-primary text-primary-foreground'
+              isActive(item.href) && 'bg-primary text-primary-foreground'
             )}
-            onClick={() => setActiveItem(item.href)}
+            onClick={() => navigate(item.href)}
           >
             <item.icon className="mr-3 h-4 w-4" />
             {item.label}

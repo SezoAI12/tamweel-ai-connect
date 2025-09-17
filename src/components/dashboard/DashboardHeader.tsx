@@ -1,5 +1,6 @@
 import { useAuth } from '@/hooks/useAuth';
 import { Button } from '@/components/ui/button';
+import { useNavigate } from 'react-router-dom';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { 
   DropdownMenu, 
@@ -23,6 +24,7 @@ interface DashboardHeaderProps {
 
 export const DashboardHeader = ({ profile }: DashboardHeaderProps) => {
   const { signOut } = useAuth();
+  const navigate = useNavigate();
 
   const getTrustBadge = (score: number) => {
     if (score >= 80) return { label: 'Platinum', variant: 'default' as const };
@@ -74,7 +76,7 @@ export const DashboardHeader = ({ profile }: DashboardHeaderProps) => {
                 </div>
               </div>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={() => navigate('/settings')}>
                 <Settings className="mr-2 h-4 w-4" />
                 Settings
               </DropdownMenuItem>

@@ -8,6 +8,10 @@ import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
 import AICoach from "./pages/AICoach";
 import MyScore from "./pages/MyScore";
+import Discover from "./pages/Discover";
+import Inbox from "./pages/Inbox";
+import Settings from "./pages/Settings";
+import ServiceManagement from "./pages/ServiceManagement";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,8 +26,12 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/discover" element={<Discover />} />
           <Route path="/ai-coach" element={<AICoach />} />
           <Route path="/my-score" element={<MyScore />} />
+          <Route path="/inbox" element={<Inbox />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/service-management" element={<ServiceManagement />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
