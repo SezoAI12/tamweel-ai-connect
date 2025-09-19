@@ -7,7 +7,8 @@ import {
   Shield, 
   Calendar, 
   CalendarDays,
-  TrendingUp
+  TrendingUp,
+  Rocket
 } from 'lucide-react';
 
 interface KeyActionsWidgetProps {
@@ -19,9 +20,10 @@ export const KeyActionsWidget = ({ userType }: KeyActionsWidgetProps) => {
     switch (userType) {
       case 'startup':
         return [
-          { icon: FileText, label: 'Generate Pitch Deck', variant: 'default' as const },
+          { icon: Rocket, label: 'Start Fundraising', variant: 'default' as const, highlight: true },
+          { icon: FileText, label: 'Generate Pitch Deck', variant: 'outline' as const },
           { icon: Users, label: 'Find Investors', variant: 'outline' as const },
-          { icon: Upload, label: 'Upload to Data Room', variant: 'secondary' as const },
+          { icon: Upload, label: 'Upload to Data Room', variant: 'outline' as const },
         ];
       case 'investor':
         return [
@@ -47,11 +49,18 @@ export const KeyActionsWidget = ({ userType }: KeyActionsWidgetProps) => {
         <CardDescription>Jump into your most important tasks</CardDescription>
       </CardHeader>
       <CardContent>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
           {actions.map((action, index) => (
-            <Button key={index} variant={action.variant} size="lg" className="h-14 flex-col gap-2">
+            <Button 
+              key={index} 
+              variant={action.variant} 
+              size="lg" 
+              className={`h-16 flex-col gap-2 ${
+                action.highlight ? 'bg-gradient-to-r from-primary to-primary-glow hover:from-primary/90 hover:to-primary-glow/90' : ''
+              }`}
+            >
               <action.icon className="h-6 w-6" />
-              <span className="text-sm">{action.label}</span>
+              <span className="text-sm font-medium">{action.label}</span>
             </Button>
           ))}
         </div>

@@ -12,6 +12,7 @@ import Discover from "./pages/Discover";
 import Inbox from "./pages/Inbox";
 import Settings from "./pages/Settings";
 import ServiceManagement from "./pages/ServiceManagement";
+import Events from "./pages/Events";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -32,6 +33,7 @@ const App = () => (
           <Route path="/inbox" element={<Inbox />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/service-management" element={<ServiceManagement />} />
+          <Route path="/events" element={<Events />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
